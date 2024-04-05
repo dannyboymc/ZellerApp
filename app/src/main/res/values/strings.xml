@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TerminalApp2</string>
+    <string name="deposit">Deposit</string>
+    <string name="withdraw">Withdraw</string>
+    <string name="transaction">Transactions</string>
+    <string name="amount">Enter amount</string>
+</resources>
