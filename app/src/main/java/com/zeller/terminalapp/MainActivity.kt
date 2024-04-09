@@ -16,47 +16,40 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.depositButton.setOnClickListener(this)
         binding.withdrawButton.setOnClickListener(this)
         setContentView(binding.root)
+        binding.balance.text = MainViewModel.balance.toString()
     }
 
     override fun onClick(view: View?) {
-        var amt = 0f
+        val amt : Float = binding.amountInput.text.toString().toFloat()
         when (view?.id) {
-            //deducts funds from balance if the field isn't empty and will check if there is enough
-            //funds to deduct, if there is enough funds it'll record the successful deduction and
-            //update the the balance. If there isn't enough funds it'll make a toast displaying
-            //not enough funds
             R.id.withdrawButton -> {
-                val balance = MainViewModel.balance
-                if (!binding.amountInput.text.isNullOrEmpty()) {
-                    amt = binding.amountInput.text.toString().toFloat()
-                    if (balance >= amt) {
-                        MainViewModel.balance -= amt
-                        binding.balance.text = MainViewModel.balance.toString()
-                        MainViewModel.transactions.addTransaction(
-                            Transactions(
-                                isDeposit = false,
-                                amount = amt
-                            )
-                        )
-                    } else {
-                        Toast.makeText(this, "Not enough balance", Toast.LENGTH_LONG).show()
-                    }
-                }
+                withdrawFunds(amt)
             }
-
             R.id.depositButton -> {
-                if (!binding.amountInput.text.isNullOrEmpty()) {
-                    amt = binding.amountInput.text.toString().toFloat()
-                    MainViewModel.balance += amt
-                    binding.balance.text = MainViewModel.balance.toString()
-                    MainViewModel.transactions.addTransaction(
-                        Transactions(
-                            isDeposit = true,
-                            amount = amt
-                        )
-                    )
-                }
+                depositFunds(amt)
             }
+        }
+    }
+
+    // The function take in the current balance and the withdraw amount and checks if there are
+    // enough funds and deducts if there is and records the transaction inside MainViewModel
+    private fun withdrawFunds(amount : Float) {
+        if (!binding.amountInput.text.isNullOrEmpty()) {
+            if (MainViewModel.enoughFundsUpdateAmount(amount)) {
+                binding.balance.text = MainViewModel.balance.toString()
+            } else {
+                Toast.makeText(this, "Not enough balance", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    // This function takes the Deposit amount and updates the balance of the MainViewModel with the
+    // new balance and prints the new balance to the textView. It also records the transaction as
+    // true for deposited and the amount
+    private fun depositFunds(amount: Float) {
+        if (!binding.amountInput.text.isNullOrEmpty()) {
+            MainViewModel.updateBalance(amount)
+            binding.balance.text = MainViewModel.balance.toString()
         }
     }
 }
