@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,10 +14,11 @@
         android:inputType="numberDecimal"
         android:textSize="48sp"
         android:gravity="center"
+        android:hint="@string/amount"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="123.00"/>
+        tools:text="123.00" />
 
     <TextView
         android:id="@+id/balance"
@@ -26,25 +26,33 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/amountInput"
         android:textSize="24sp"
-        android:gravity="center"
-        />
+        android:gravity="center" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/withdrawButton"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="Withdraw"
+        android:text="@string/withdraw"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/depositButton"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="Deposit"
+        android:text="@string/deposit"
         app:layout_constraintBottom_toTopOf="@id/withdrawButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/transactionButton"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:text="@string/transaction"
+        app:layout_constraintBottom_toTopOf="@+id/depositButton"
+        app:layout_constraintEnd_toEndOf="@+id/depositButton"
+        app:layout_constraintStart_toStartOf="@+id/depositButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

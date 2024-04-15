@@ -20,14 +20,14 @@ class MainViewModelUnitTest {
     @Test
     fun testEnoughFundsUpdateAmount_EnoughFunds() {
         // Arrange
-        val withdrawAmount = 500.0f
+        val withdrawAmount = 1000.0f
 
         // Act
         val result = MainViewModel.enoughFundsUpdateAmount(withdrawAmount)
 
         // Assert
         assertEquals(true, result)
-        assertEquals(500.0f, MainViewModel.balance)
+        assertEquals(0.0f, MainViewModel.balance)
         // Assuming transactions are being added correctly, you might also test the transactions list here.
     }
 

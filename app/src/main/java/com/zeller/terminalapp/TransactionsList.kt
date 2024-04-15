@@ -5,4 +5,8 @@ class TransactionsList {
     fun addTransaction(transactions: Transactions) {
         transactionsList.add(transactions)
     }
+
+    fun getTransactionsList(): List<Pair<Boolean, Float>> {
+        return transactionsList.map { it.isDeposit to it.amount }
+    }
 }
